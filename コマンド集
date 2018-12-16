@@ -1,0 +1,49 @@
+npm init
+npm install --save twitter
+npm install crypto --save
+npm install body-parser --save
+
+空ラムダhealthbot_repTweet作成(healthtipsbot_CRCにすべきだった)
+  環境変数設定（Twitterトークン）
+
+APIゲートウェイ/webhook - GET - メソッド作成
+    Lambda, healthbot_CRCを呼び出すよう設定
+    URLの呼び出し：https://2zhy5ok1y3.execute-api.ap-northeast-1.amazonaws.com/prod
+    リソース/webhook作成
+    GETメソッド作成
+    CORSオン
+    ブラウザで、https://2zhy5ok1y3.execute-api.ap-northeast-1.amazonaws.com/prod/webhookで”Hello from Lambda”
+    TwitterへWebhookURLを登録：
+        https://api.twitter.com/1.1/account_activity/all/stage/webhooks.json?url=[webhookのURL]
+        ([env_name]はstageにした)
+
+
+
+TwitterのDetailsを編集、
+    Callback URL（Webhook URL)
+    https://2zhy5ok1y3.execute-api.ap-northeast-1.amazonaws.com/prod/webhook
+
+
+index.jsを作成、編集
+    package.jsonにデプロイコードを追記(Lambdaのarn名変更を忘れずに）
+    CRCトークンに答えるコードをデプロイ
+    npm run deploy
+
+TwitterへWebhookURLを登録：
+    Postmanでできな〜い・・・
+    いつものWebhookスクリプトを使う。
+    CloudWatch Logs: receiving crc check. token=ZDc3NTAzYmEtNjc4NC00MzRiLTliMzktZmVmZmJlZjFmYjhj res=qF+RxO3gKbEC9wrQWVwpiFmXfoxDhcDEgHbzbBvHqbo=
+    返された値：[{"id":"1073838684430954497","url":"https://2zhy5ok1y3.execute-api.ap-northeast-1.amazonaws.com/prod/webhook","valid":true,"created_timestamp":"2018-12-14 06:56:38 +0000"}]
+
+
+最後、API GatewayのCORSのオリジンをを*.twitter.comに設定
+APIデプロイ
+
+
+
+
+
+
+
+us-east-1　米国東部（バージニア北部）
+ap-northeast-1　アジアパシフィック (東京)
